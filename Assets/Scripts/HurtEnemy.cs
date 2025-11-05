@@ -7,9 +7,9 @@ public class HurtEnemy : MonoBehaviour
     [SerializeField]
     int hurtAmount = 1;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        EnemyHealth ehealth = collision.gameObject.GetComponent<EnemyHealth>();
+        EnemyHealth ehealth = collider.gameObject.GetComponent<EnemyHealth>();
         if (ehealth == null)
         {
             return;

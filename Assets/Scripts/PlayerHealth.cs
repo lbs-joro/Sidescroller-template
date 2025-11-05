@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,6 +9,14 @@ public class PlayerHealth : MonoBehaviour
     int maxHealth = 3;
 
     int health;
+
+    [SerializeField]
+    AudioClip hurtSound;
+
+    AudioSource audioSource;
+
+    [SerializeField]
+    string gameOverSceneName;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +26,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void Hurt(int amount)
     {
-        
+
+        if (audioSource != null && hurtSound != null)
+        {
+            audioSource.PlayOneShot(hurtSound);
+        }
+
         health -= amount;
         if(health <= 0)
         {
@@ -27,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     void GameOver()
     {
-        //TODO: Game over?
+        SceneManager.LoadScene(gameOverSceneName);
     }
 }
                 

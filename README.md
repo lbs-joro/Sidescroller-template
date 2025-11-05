@@ -20,17 +20,12 @@ Scriptet gör att objektet rör sig enligt ett zick-zack mönster.
 * `Zig Zag Time` tid som styr hur ofta objektet byter riktning
 
 ### `Shooter`
-Scriptet gör att det skapas `Projectile` objekt vid en angiven knapptryckning och efter en angiven cooldown-tid. Anges ingen knapptryckning skapas det objekt automatiskt.
+Scriptet gör att det spawnas objekt vid en angiven knapptryckning och efter en angiven cooldown-tid. Anges ingen knapptryckning skapas det objekt automatiskt.
 
 * `Fire Button` vid vilken knapp ska objekt skapas.
 * `Fire Direction` åt vilket håll ska objektet åka.
 * `Cool Down` hur lång tid mellan att objekten skapas
 * `Spawn Location` vid vilken plats ska objekten skapas (kan lämnas tom)
-
-
-### `Projectile`
-*Kräver en Rigidbody2D på samma objekt*
-Scriptet gör att objektet åker framåt, i den rikting som anges av Shooter-objektet. *Kan bara användas på en prefab som skapas av en Shooter-komponent*
 
 ### `EnemyHealth`
 

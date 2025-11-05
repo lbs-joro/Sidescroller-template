@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     [SerializeField]
     KeyCode fireButton;
 
     [SerializeField]
-    Vector2 fireDirection = Vector2.up;
+    Vector2 fireDirection = Vector2.zero;
 
     [SerializeField]
     float coolDown;
 
     [SerializeField]
-    Projectile projectilePrefab;
+    GameObject prefab;
     [SerializeField]
     Transform spawnLocation;
 
@@ -40,8 +40,14 @@ public class Shooter : MonoBehaviour
                 pos = spawnLocation.position;
             }
 
-            Projectile p = Instantiate(projectilePrefab, pos, Quaternion.identity);
-            p.Init(fireDirection);
+            GameObject spawnedObject = Instantiate(prefab, pos, Quaternion.identity);
+
+            Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = fireDirection;
+            }
+            
 
             timer = coolDown;
         }

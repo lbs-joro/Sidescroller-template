@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     float zigzagTime = 1f;
 
+    [SerializeField]
+    ZigZagDirection zigzagdirection;
+
     Rigidbody2D rigidBody;
     float timer;
     
@@ -27,6 +30,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(rigidBody == null)
+        {
+            return;
+        }
+
         timer -= Time.deltaTime;
         ZigZagMovement();
     }
@@ -35,14 +43,29 @@ public class Enemy : MonoBehaviour
     {
         if(timer < 0)
         {
-            velocity = new Vector2(-velocity.x, velocity.y);
+            if(zigzagdirection == ZigZagDirection.HORIZONTAL)
+            {
+                velocity = new Vector2(velocity.x, -velocity.y);
+            }
+            if (zigzagdirection == ZigZagDirection.VERTICAL)
+            {
+                velocity = new Vector2(-velocity.x, velocity.y);
+            }
+
+
             timer = zigzagTime;
         }
 
 
-        rigidBody.velocity = velocity;
+        rigidBody.linearVelocity = velocity;
         
     }
 
     
+}
+
+public enum ZigZagDirection
+{
+    HORIZONTAL,
+    VERTICAL
 }

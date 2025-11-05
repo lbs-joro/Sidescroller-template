@@ -7,9 +7,24 @@ public class HurtPlayer : MonoBehaviour
     [SerializeField]
     int hurtAmount = 1;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    [SerializeField]
+    AudioClip hurtSound;
+
+    [SerializeField]
+    GameObject deathObject;
+
+    AudioSource audioSource;
+
+    private void Start()
     {
-        PlayerHealth phealth = collision.gameObject.GetComponent<PlayerHealth>();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        PlayerHealth phealth = collider.gameObject.GetComponent<PlayerHealth>();
         if (phealth == null)
         {
             return;

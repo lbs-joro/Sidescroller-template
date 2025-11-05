@@ -9,23 +9,41 @@ public class EnemyHealth : MonoBehaviour
 
     int health;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    AudioClip hurtSound;
+
+    [SerializeField]
+    GameObject deathObject;
+
+    AudioSource audioSource;
+
+    private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         health = maxHealth;
     }
 
     public void Hurt(int amount)
     {
         health -= amount;
+        if(audioSource != null && hurtSound != null)
+        {
+            audioSource.PlayOneShot(hurtSound);
+        }
+
         if (health <= 0)
         {
-            GameOver();
+            Die();
         }
     }
 
-    void GameOver()
+    void Die()
     {
+        if(deathObject != null)
+        {
+            Instantiate(deathObject, transform.position, Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 }
