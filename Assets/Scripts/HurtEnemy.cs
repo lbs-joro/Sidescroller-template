@@ -7,6 +7,9 @@ public class HurtEnemy : MonoBehaviour
     [SerializeField]
     int hurtAmount = 1;
 
+    [SerializeField]
+    bool destroyOnTouch = true;
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         EnemyHealth ehealth = collider.gameObject.GetComponent<EnemyHealth>();
@@ -16,6 +19,11 @@ public class HurtEnemy : MonoBehaviour
         }
 
         ehealth.Hurt(hurtAmount);
-        Destroy(gameObject);
+
+        if (destroyOnTouch)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }

@@ -13,6 +13,9 @@ public class HurtPlayer : MonoBehaviour
     [SerializeField]
     GameObject deathObject;
 
+    [SerializeField]
+    bool destroyOnTouch = true;
+
     AudioSource audioSource;
 
     private void Start()
@@ -31,6 +34,11 @@ public class HurtPlayer : MonoBehaviour
         }
 
         phealth.Hurt(hurtAmount);
-        Destroy(gameObject);
+
+        if (destroyOnTouch)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 }
